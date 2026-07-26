@@ -1,0 +1,13 @@
+# BrewMetrics — Python dependencies
+# Install into an activated virtual environment with:  pip install -r requirements.txt
+#
+# Versions are pinned with >= (minimum) so the project installs cleanly on
+# current Python. SQLite is used for the database and needs no entry here —
+# it ships built into Python as the standard-library module `sqlite3`.
+
+pandas>=2.2          # tabular data (DataFrames) for generation + analysis
+numpy>=1.26          # fast numeric arrays + the seeded random-number engine
+scipy>=1.13          # statistics — the two-proportion z-test for the A/B test
+scikit-learn>=1.5    # machine learning — k-means clustering for RFM segments
+streamlit>=1.37      # turns the analysis into the interactive web dashboard
+plotly>=5.22         # palette-colored charts inside the Streamlit dashboard
