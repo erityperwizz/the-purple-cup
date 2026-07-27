@@ -1,0 +1,12 @@
+# The Purple Cup - Streamlit theme
+# Sets the base look; the app layers a custom purple design on top of this.
+[theme]
+primaryColor = "#9333EA"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3E8FD"
+textColor = "#2C0645"
+font = "sans serif"
+
+[server]
+# Portfolio app: no telemetry prompts, cleaner first run.
+headless = true
