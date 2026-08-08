@@ -1,5 +1,9 @@
 # BrewMetrics — Marketing Analytics for *The Purple Cup*
 
+**[▶ Open the live dashboard](https://the-purple-cup-mnxzcg2cphte2fq3hyqsqh.streamlit.app/)**
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://the-purple-cup-mnxzcg2cphte2fq3hyqsqh.streamlit.app/)
+
 > **Simulated data · portfolio project.** The Purple Cup is a fictional
 > small-batch specialty drink brand (matcha, ube, coffee). All customers,
 > campaigns, and purchases in this repository are synthetic data generated
@@ -16,7 +20,7 @@ controlled and reproducible.
 
 ## Status
 
-The analysis and dashboard are complete; deployment is the remaining step.
+The analysis, dashboard and deployment are complete.
 
 - [x] Phase 0 — Project setup (environment, dependencies, repo scaffolding)
 - [x] Phase 1 — Brand design + synthetic data generation
@@ -26,7 +30,7 @@ The analysis and dashboard are complete; deployment is the remaining step.
 - [x] Phase 5 — Email A/B test (two-proportion z-test)
 - [x] Phase 6 — Customer segmentation (RFM + k-means)
 - [x] Phase 7 — Streamlit dashboard
-- [ ] Phase 8 — Deploy to a public link
+- [x] Phase 8 — Deploy to a public link (Streamlit Community Cloud)
 - [ ] Phase 9 — README polish + written findings
 
 ## Selected findings
@@ -49,6 +53,10 @@ All figures below come from the synthetic dataset in `data/brewmetrics.db`.
 Python (pandas, numpy) · SQL (SQLite) · SciPy · scikit-learn · Streamlit · Plotly
 
 ## Getting started (local)
+
+No install needed to look around — the
+[live dashboard](https://the-purple-cup-mnxzcg2cphte2fq3hyqsqh.streamlit.app/)
+runs the same code. To run it yourself:
 
 ```bash
 # 1. create and activate a virtual environment
