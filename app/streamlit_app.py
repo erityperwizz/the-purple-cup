@@ -580,7 +580,7 @@ def funnel_bars(f) -> None:
             f'<div class="bar"><i></i></div></div>')
     st.markdown(h(f'<div class="pcf" data-reveal="funnel">{"".join(rows)}'
                   f'<div class="pcf-note">widths use an eased scale so every stage stays '
-                  f'visible &mdash; the counts are exact</div></div>'), unsafe_allow_html=True)
+                  f'visible; the counts are exact</div></div>'), unsafe_allow_html=True)
 
 
 def insight(body: str) -> None:
@@ -1064,7 +1064,7 @@ st.markdown(h(f"""
       <div class="pc-eyebrow">simulated data &middot; portfolio project</div>
       <h1 class="pc-display">Every Cup<br><em>Tells a Story.</em></h1>
       <p class="pc-lede">Six months of spend, journeys, experiments and customers for
-        <b>The Purple Cup</b> &mdash; a fictional small-batch matcha, ube &amp; coffee brand &mdash;
+        <b>The Purple Cup</b> (a fictional small-batch matcha, ube &amp; coffee brand),
         brewed down into the numbers that actually move the business.</p>
       <div class="pc-hero-cta">
         <button class="pc-btn" data-goto="sec-overview">Pour me a look</button>
@@ -1127,7 +1127,7 @@ for i, (col, (label, raw, dec, pre, suf, sub), tint, bar, icon) in enumerate(
 # --- section 02: funnel + attribution --------------------------------------
 section("02", "sec-funnel", "Funnel",
         "Where the journey <em>leaks</em>",
-        "Impression to click to purchase &mdash; plus who really deserves the credit once "
+        "Impression to click to purchase, plus who really deserves the credit once "
         "you stop giving it all to the last click.")
 
 with st.container(border=True, key="pcpanel-funnel"):
@@ -1162,7 +1162,7 @@ with st.container(border=True, key="pcpanel-funnel"):
         stats = d["attr_stats"]
         insight(f"""
           {stats['n_cross_channel']/stats['n_conversions']:.0%} of purchases were cross-channel journeys.
-          Flip between <b>last</b> and <b>first</b> touch to watch <b>Instagram</b> jump &mdash; it starts
+          Flip between <b>last</b> and <b>first</b> touch to watch <b>Instagram</b> jump: it starts
           journeys it rarely closes, so the ad-platform default undervalues it.""")
 
 # --- section 03: A/B test --------------------------------------------------
@@ -1172,7 +1172,7 @@ section("03", "sec-test", "Experiment",
         "rather than by whichever variant happened to look nicer.")
 
 with st.container(border=True, key="pcpanel-ab"):
-    mini(FLASK_ICON, "Email A/B test &mdash; subject line")
+    mini(FLASK_ICON, "Email A/B test: subject line")
     ab = d["ab"]
     significant = ab["p_value"] < 0.05
     c1, c2, c3, c4 = st.columns([1, 1, 1, 1.4], gap="medium")
@@ -1192,12 +1192,12 @@ with st.container(border=True, key="pcpanel-ab"):
     insight(f"""
       Variant B (&ldquo;A little purple surprise inside&rdquo;) lifted conversion from {ab['p_a']:.1%}
       to {ab['p_b']:.1%}, a {ab['rel_lift']:.0%} relative increase (p = {ab['p_value']:.3f}). The 95% CI
-      for the lift is [{ab['ci_low']*100:+.2f}, {ab['ci_high']*100:+.2f}] points &mdash; real, though the
-      low end is modest.""")
+      for the lift is [{ab['ci_low']*100:+.2f}, {ab['ci_high']*100:+.2f}] points, so the lift is real
+      though its low end is modest.""")
 
 # --- section 04: segments --------------------------------------------------
 section("04", "sec-people", "Customers",
-        "Not one audience &mdash; <em>four</em>",
+        "Not one audience: <em>four</em>",
         "RFM scoring plus k-means splits the buyer base into groups that behave "
         "differently enough to deserve different marketing.")
 
@@ -1220,8 +1220,8 @@ with st.container(border=True, key="pcpanel-seg"):
         champ = seg[seg["segment"] == "Champions"].iloc[0]
         insight(f"""
           <b>Champions</b> are {champ['pct_of_customers']:.0f}% of buyers but
-          {champ['pct_of_revenue']:.0f}% of revenue. <b>At risk</b> customers went quiet ~4 months ago
-          &mdash; the highest-ROI win-back target.""")
+          {champ['pct_of_revenue']:.0f}% of revenue. <b>At risk</b> customers went quiet ~4 months ago,
+          making them the highest-ROI win-back target.""")
 
     with right2:
         mini(BEAN_ICON, "How the segments cluster (RFM)")
@@ -1238,7 +1238,7 @@ with st.container(border=True, key="pcpanel-seg"):
         st.plotly_chart(style_fig(fig, 330), width="stretch", config={"displayModeBar": False})
         insight(f"""
           Each dot is one of {len(rfm):,} purchasing customers; {d['n_prospects']:,} never-purchased
-          prospects are held out. k-means grouped these by similarity &mdash; notice At risk drifting
+          prospects are held out. k-means grouped these by similarity; notice At risk drifting
           right (gone quiet).""")
 
 # --- footer / colophon -----------------------------------------------------
@@ -1250,7 +1250,7 @@ st.markdown(h(f"""
     <div>
       <h4>About this cup</h4>
       <p><b>The Purple Cup</b> is a fictional brand and every figure here is simulated data built for a
-        portfolio project &mdash; it is not real customer data. The analysis, though, is the real thing:
+        portfolio project; it is not real customer data. The analysis, though, is the real thing:
         SQL over a normalized SQLite schema, funnel &amp; conversion analysis, first / last / linear
         attribution, a two-proportion z-test, and RFM + k-means segmentation.</p>
       <p style="opacity:.75;">Recency snapshot: {d['snapshot']}.</p>
@@ -1262,7 +1262,7 @@ st.markdown(h(f"""
         <span>Python</span><span>pandas</span><span>SQLite</span><span>SciPy</span>
         <span>scikit-learn</span><span>Streamlit</span><span>Plotly</span>
       </div>
-      <p class="pad">Scroll and the iced coffee empties &mdash; the glass follows you down the page
+      <p class="pad">Scroll and the iced coffee empties: the glass follows you down the page
         as a reading meter, the numbers count up, the sections arrive, and the beans drift.
         All of it is one small scroll engine, no libraries.</p>
     </div>
