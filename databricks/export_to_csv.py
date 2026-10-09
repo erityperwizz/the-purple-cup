@@ -21,6 +21,11 @@ def main() -> None:
     with sqlite3.connect(DB) as conn:
         for table in TABLES:
             df = pd.read_sql(f"SELECT * FROM {table}", conn)
+            # Integer ID columns with blanks (product_id on clicks and carts) come back from
+            # pandas as floats ("2.0"). Write them as whole numbers so strict casts accept them.
+            for col in df.columns:
+                if col.endswith("_id"):
+                    df[col] = df[col].astype("Int64")
             df.to_csv(OUT / f"{table}.csv", index=False)
             print(f"{table:<10} {len(df):>7,} rows -> databricks/data/{table}.csv")
 
