@@ -1,0 +1,15 @@
+product_id,sku,name,category,price
+1,PC-M01,Ceremonial Matcha Tin,Matcha,32.0
+2,PC-M02,Everyday Matcha Pouch,Matcha,22.0
+3,PC-M03,Matcha Latte Starter Kit,Matcha,45.0
+4,PC-M04,Hojicha Roast Pouch,Matcha,20.0
+5,PC-U05,Ube Coconut Latte Blend,Ube,26.0
+6,PC-U06,Ube Syrup Bottle,Ube,18.0
+7,PC-U07,Ube Cookie Butter Spread,Ube,16.0
+8,PC-C08,Purple Reign Single-Origin Beans,Coffee,24.0
+9,PC-C09,Cold Brew Concentrate,Coffee,21.0
+10,PC-C10,Lavender Mocha Blend,Coffee,25.0
+11,PC-B11,Butterfly Pea Flower Tea,Botanical,19.0
+12,PC-B12,The Purple Cup Ceramic Mug,Accessory,28.0
+13,PC-B13,Starter Sampler Box,Bundle,38.0
+14,PC-B14,Reusable Milk Frother,Accessory,15.0
