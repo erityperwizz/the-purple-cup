@@ -32,6 +32,8 @@ Complete. The analysis, dashboard, deployment and write-up are all done.
 - [x] Phase 7: Streamlit dashboard
 - [x] Phase 8: Deploy to a public link (Streamlit Community Cloud)
 - [x] Phase 9: README polish + written findings
+- [x] Phase 10: Databricks lakehouse pipeline (medallion layers, data quality, Delta constraints, star schema, reconciliation)
+- [x] Phase 11: Logistic regression on purchase likelihood
 
 ## The headline numbers
 
@@ -142,6 +144,22 @@ less than acquiring a stranger. Separately, **1,314 people have never purchased
 at all** and are held out of the segmentation entirely; they are an acquisition
 problem, not a retention one, and mixing the two would distort both.
 
+### 5. Controlling for clicks changes which channel looks best
+
+A logistic regression on 2,998 customers (run on Databricks, `databricks/04_purchase_regression`)
+models whether a customer ever buys from their **first clicked channel**, their click count, and
+their region. Raw purchase rates suggest Paid Search is the best first channel and that Referral is
+roughly tied with Instagram. But Referral customers click the least, so once clicks are held constant:
+
+| First channel (vs. Instagram) | Odds ratio | 95% CI | p-value |
+| --- | --- | --- | --- |
+| Referral | 1.64 | 1.28 to 2.10 | 0.0001 |
+| Paid Search | 1.47 | 1.17 to 1.85 | 0.001 |
+| Email | 1.19 | 0.97 to 1.46 | 0.095 (not significant) |
+
+Each extra click raises the odds of buying by about 21% (OR 1.21), and **no region differs
+significantly** from West. These are associations from observational data, not causal effects.
+
 ### What I would do next
 
 1. **Move budget from Instagram to Email and Referral.** Email returns over 4x
@@ -177,9 +195,27 @@ The dashboard imports these modules directly rather than re-implementing
 anything, so the numbers on screen and the numbers in the analysis layer cannot
 drift apart.
 
+## Databricks lakehouse pipeline
+
+The `databricks/` folder rebuilds the analysis layer on **Databricks** (Unity Catalog, Delta Lake,
+Spark SQL, PySpark) as a medallion pipeline:
+
+- **Bronze:** raw CSVs landed in a Unity Catalog volume and loaded as string-typed Delta tables with
+  source-file and ingest-time lineage columns.
+- **Silver:** typed and de-duplicated tables, **12 automated data quality checks** (primary keys,
+  foreign keys, allowed values, business rules) logged to a results table, and **Delta CHECK
+  constraints** that reject bad writes.
+- **Gold:** a **star schema** (event fact table with customer, product, campaign and date
+  dimensions) and marts for the funnel, channel ROAS, monthly revenue and customer features.
+- **Reconciliation:** 20 checks confirm no rows were lost and that every headline number matches
+  the original SQLite and pandas analysis.
+
+See [`databricks/README.md`](databricks/README.md) to run it on Databricks Free Edition.
+
 ## Tech stack
 
-Python (pandas, numpy) · SQL (SQLite) · SciPy · scikit-learn · Streamlit · Plotly
+Python (pandas, numpy) · SQL (SQLite, Spark SQL) · Databricks (Delta Lake, Unity Catalog, PySpark) ·
+SciPy · statsmodels · scikit-learn · Streamlit · Plotly
 
 ## Getting started (local)
 
@@ -214,6 +250,7 @@ analysis/           funnel, attribution, A/B test and segmentation modules
 app/                the Streamlit dashboard
 data/               the generated SQLite database
 data_generation/    the seeded synthetic-data generator
+databricks/         the Databricks medallion pipeline and logistic regression
 sql/                standalone analysis queries
 ```
 
